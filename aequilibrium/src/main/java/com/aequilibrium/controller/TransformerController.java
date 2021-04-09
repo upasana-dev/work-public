@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aequilibrium.dto.TransformerDataDto;
+import com.aequilibrium.dto.TransformerUpdateDto;
 import com.aequilibrium.service.TransformerService;
 
 @RestController
@@ -32,7 +33,7 @@ public class TransformerController {
 	}
 	
 	@PostMapping(path="/create", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public TransformerDataDto addTransformer(@RequestBody TransformerDataDto transformerToCreate) {
+	public TransformerDataDto addTransformer(@RequestBody TransformerUpdateDto transformerToCreate) {
 
 		return service.createTransformer(transformerToCreate);
 	}

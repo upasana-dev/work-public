@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aequilibrium.dto.TransformerDataDto;
+import com.aequilibrium.dto.TransformerUpdateDto;
 import com.aequilibrium.mapper.TransformerDtoMapper;
+import com.aequilibrium.mapper.UpdateTransformerDtoMapper;
 import com.aequilibrium.model.Transformer;
 import com.aequilibrium.repository.TransformerRepository;
 
@@ -20,6 +22,9 @@ public class TransformerService {
 	@Autowired
 	private TransformerDtoMapper dataDtoMapper;
 	
+	@Autowired
+	private UpdateTransformerDtoMapper updateDtoMapper;
+	
 	
 	public List<TransformerDataDto> listTransformers(){
 		Iterable<Transformer> transformerIterable = transformerRepository.findAll();
@@ -31,9 +36,9 @@ public class TransformerService {
 	}
 	
 	
-	public TransformerDataDto createTransformer(TransformerDataDto transformerToCreate) {
+	public TransformerDataDto createTransformer(TransformerUpdateDto transformerToCreate) {
 		
-		Transformer newTransformer = dataDtoMapper.mapToModel(transformerToCreate);
+		Transformer newTransformer = updateDtoMapper.mapToModel(transformerToCreate);
 		
 		System.out.println(newTransformer);
 		
