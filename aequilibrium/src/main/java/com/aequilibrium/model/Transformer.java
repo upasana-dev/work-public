@@ -13,7 +13,7 @@ import com.aequilibrium.model.constants.TransformerType;
 public class Transformer {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String name;
@@ -60,6 +60,7 @@ public class Transformer {
 		result = prime * result + firepower;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + intelligence;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + rank;
 		result = prime * result + skill;
 		result = prime * result + speed;
@@ -90,6 +91,11 @@ public class Transformer {
 			return false;
 		if (intelligence != other.intelligence)
 			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
 		if (rank != other.rank)
 			return false;
 		if (skill != other.skill)
@@ -105,9 +111,9 @@ public class Transformer {
 
 	@Override
 	public String toString() {
-		return "Transformer [id=" + id + ", strength=" + strength + ", intelligence=" + intelligence + ", speed="
-				+ speed + ", endurance=" + endurance + ", rank=" + rank + ", courage=" + courage + ", firepower="
-				+ firepower + ", skill=" + skill + ", type=" + transformerType + "]";
+		return "Transformer [id=" + id + ", name=" + name + ", strength=" + strength + ", intelligence=" + intelligence
+				+ ", speed=" + speed + ", endurance=" + endurance + ", rank=" + rank + ", courage=" + courage
+				+ ", firepower=" + firepower + ", skill=" + skill + ", transformerType=" + transformerType + "]";
 	}
 
 	public Long getId() {

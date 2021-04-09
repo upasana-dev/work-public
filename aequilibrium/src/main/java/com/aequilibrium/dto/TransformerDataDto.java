@@ -4,15 +4,8 @@ import com.aequilibrium.model.constants.TransformerType;
 
 public class TransformerDataDto {
 	
-	private String name;
-	
-	public String getName() {
-		return name;
-	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	private String name;
 
 	private int strength;
 	private int intelligence;
@@ -26,6 +19,33 @@ public class TransformerDataDto {
 
 	private TransformerType transformerType;
 
+	public TransformerDataDto() {
+		super();
+	}
+	
+	public TransformerDataDto(String name, int strength, int intelligence, int speed, int endurance, int rank,
+			int courage, int firepower, int skill, TransformerType transformerType) {
+		super();
+		this.name = name;
+		this.strength = strength;
+		this.intelligence = intelligence;
+		this.speed = speed;
+		this.endurance = endurance;
+		this.rank = rank;
+		this.courage = courage;
+		this.firepower = firepower;
+		this.skill = skill;
+		this.transformerType = transformerType;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public int getStrength() {
 		return strength;
 	}

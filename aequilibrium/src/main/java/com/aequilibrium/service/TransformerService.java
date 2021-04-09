@@ -18,7 +18,7 @@ public class TransformerService {
 	private TransformerRepository transformerRepository;
 	
 	@Autowired
-	private TransformerDtoMapper creationMapper;
+	private TransformerDtoMapper dataDtoMapper;
 	
 	
 	public List<TransformerDataDto> listTransformers(){
@@ -27,18 +27,27 @@ public class TransformerService {
 		List<Transformer> result = new ArrayList<>();
 		transformerIterable.iterator().forEachRemaining(result::add);
 		
-		return creationMapper.domainToDtoList(result);
+		return dataDtoMapper.domainToDtoList(result);
 	}
 	
 	
-//	public TransformerDataDto createTransformer(TransformerDataDto transformerToCreate) {
-//		
-//		Transformer newTransformer = creationMapper.mapToModel(transformerToCreate);
-//		
-//		Transformer savedTransformer = transformerRepository.save(newTransformer);
-//		
-//		return creationMapper.domainToDto(savedTransformer);
-//		
-//	}
+	public TransformerDataDto createTransformer(TransformerDataDto transformerToCreate) {
+		
+		Transformer newTransformer = dataDtoMapper.mapToModel(transformerToCreate);
+		
+		System.out.println(newTransformer);
+		
+		//The skill is a composite value, computed based on the other attributes of the transformer
+		newTransformer.setSkill(computeSkill(transformerToCreate.getStrength(), transformerToCreate.getEndurance(), transformerToCreate.getFirepower(), transformerToCreate.getIntelligence(), transformerToCreate.getSpeed()));
+		
+		Transformer savedTransformer = transformerRepository.save(newTransformer);
+		
+		return dataDtoMapper.domainToDto(savedTransformer);
+		
+	}
+	
+	int computeSkill(int strength, int endurance, int firepower, int intelligence, int speed) {
+		return strength+ endurance + firepower + intelligence + speed;
+	}
 
 }
