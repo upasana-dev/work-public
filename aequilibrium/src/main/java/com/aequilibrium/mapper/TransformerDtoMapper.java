@@ -20,8 +20,8 @@ public interface TransformerDtoMapper {
 	@Mapping(target = "id", ignore = true)
 	public Transformer mapToModel(TransformerDataDto dto);
 	
-	public TransformerDataDto domainToDto(Transformer model);
+	public TransformerDataDto modelToDto(Transformer model);
 	
-	public List<TransformerDataDto> domainToDtoList(List<Transformer> modelObjects);
+	public List<TransformerDataDto> modelToDtoList(List<Transformer> modelObjects);
 
 }

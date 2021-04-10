@@ -36,7 +36,7 @@ public class TransformerService {
 		List<Transformer> result = new ArrayList<>();
 		transformerIterable.iterator().forEachRemaining(result::add);
 
-		return dataDtoMapper.domainToDtoList(result);
+		return dataDtoMapper.modelToDtoList(result);
 	}
 
 	public TransformerDataDto createTransformer(TransformerUpdateDto transformerToCreate) {
@@ -54,7 +54,7 @@ public class TransformerService {
 
 		Transformer savedTransformer = transformerRepository.save(updateDtoMapper.mapToModel(transformerToCreate));
 
-		return dataDtoMapper.domainToDto(savedTransformer);
+		return dataDtoMapper.modelToDto(savedTransformer);
 
 	}
 
