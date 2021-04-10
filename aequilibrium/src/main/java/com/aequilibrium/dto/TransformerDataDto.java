@@ -16,6 +16,7 @@ public class TransformerDataDto {
 	private int firepower;
 
 	private int skill;
+	private int overallRating;
 
 	private TransformerType transformerType;
 
@@ -24,7 +25,7 @@ public class TransformerDataDto {
 	}
 	
 	public TransformerDataDto(String name, int strength, int intelligence, int speed, int endurance, int rank,
-			int courage, int firepower, int skill, TransformerType transformerType) {
+			int courage, int firepower, int skill, int overallRating, TransformerType transformerType) {
 		super();
 		this.name = name;
 		this.strength = strength;
@@ -35,9 +36,10 @@ public class TransformerDataDto {
 		this.courage = courage;
 		this.firepower = firepower;
 		this.skill = skill;
+		this.overallRating = overallRating;
 		this.transformerType = transformerType;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -116,6 +118,14 @@ public class TransformerDataDto {
 
 	public void setTransformerType(TransformerType transformerType) {
 		this.transformerType = transformerType;
+	}
+
+	public int getOverallRating() {
+		return overallRating;
+	}
+
+	public void setOverallRating(int overallRating) {
+		this.overallRating = overallRating;
 	}
 
 }

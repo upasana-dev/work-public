@@ -14,8 +14,13 @@ public class Transformer {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	/**
+	 * This is an internal ID that will not be exposed to the customer
+	 */
 	private Long id;
-	
+	/**
+	 * Functional identifier that will be used to identify a transformer
+	 */
 	private String name;
 	
 
@@ -29,17 +34,16 @@ public class Transformer {
 	
 	private int skill;
 	
+	private int overallRating;
+	
 	@Enumerated(EnumType.STRING)
 	private TransformerType transformerType;
 
-	public Transformer() {
-		super();
-	}
-
-	public Transformer(Long id, int strength, int intelligence, int speed, int endurance, int rank, int courage,
-			int firepower, int skill, TransformerType type) {
+	public Transformer(Long id, String name, int strength, int intelligence, int speed, int endurance, int rank,
+			int courage, int firepower, int skill, int overallRating, TransformerType transformerType) {
 		super();
 		this.id = id;
+		this.name = name;
 		this.strength = strength;
 		this.intelligence = intelligence;
 		this.speed = speed;
@@ -48,7 +52,12 @@ public class Transformer {
 		this.courage = courage;
 		this.firepower = firepower;
 		this.skill = skill;
-		this.transformerType = type;
+		this.overallRating = overallRating;
+		this.transformerType = transformerType;
+	}
+
+	public Transformer() {
+		super();
 	}
 
 	@Override
@@ -61,6 +70,7 @@ public class Transformer {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + intelligence;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + overallRating;
 		result = prime * result + rank;
 		result = prime * result + skill;
 		result = prime * result + speed;
@@ -96,6 +106,8 @@ public class Transformer {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (overallRating != other.overallRating)
+			return false;
 		if (rank != other.rank)
 			return false;
 		if (skill != other.skill)
@@ -113,7 +125,8 @@ public class Transformer {
 	public String toString() {
 		return "Transformer [id=" + id + ", name=" + name + ", strength=" + strength + ", intelligence=" + intelligence
 				+ ", speed=" + speed + ", endurance=" + endurance + ", rank=" + rank + ", courage=" + courage
-				+ ", firepower=" + firepower + ", skill=" + skill + ", transformerType=" + transformerType + "]";
+				+ ", firepower=" + firepower + ", skill=" + skill + ", overallRating=" + overallRating
+				+ ", transformerType=" + transformerType + "]";
 	}
 
 	public Long getId() {
@@ -202,6 +215,14 @@ public class Transformer {
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getOverallRating() {
+		return overallRating;
+	}
+
+	public void setOverallRating(int overallRating) {
+		this.overallRating = overallRating;
 	}
 
 }
