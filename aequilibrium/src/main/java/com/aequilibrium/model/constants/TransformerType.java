@@ -11,8 +11,8 @@ package com.aequilibrium.model.constants;
  *
  */
 public enum TransformerType {
-	A("Autobot"),
-	D("Decepticon");
+	A("Autobots"),
+	D("Decepticons");
 	
 	private TransformerType(String label) {
 		this.label = label;
