@@ -1,7 +1,6 @@
 package com.aequilibrium.service;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -41,8 +40,11 @@ public class TransformerService {
 	}
 
 	public TransformerDataDto createTransformer(TransformerUpdateDto transformerToCreate) {
+		if(transformerToCreate==null) {
+			throw new RuntimeException("Data cannot be null!");
+		}
 
-		if (StringUtils.hasText(transformerToCreate.getName())) {
+		if (!StringUtils.hasText(transformerToCreate.getName())) {
 			throw new RuntimeException("Invalid transformer, no name specified, creation aborted");
 		}
 
@@ -50,26 +52,10 @@ public class TransformerService {
 			throw new RuntimeException("Invalid transformer, no type specified, creation aborted");
 		}
 
-		Transformer newTransformer = updateDtoMapper.mapToModel(transformerToCreate);
-
-		System.out.println(newTransformer);
-
-		// The skill is a composite value, computed based on the other attributes of the
-		// transformer
-		newTransformer.setSkill(computeSkill(transformerToCreate.getStrength(), transformerToCreate.getEndurance(),
-				transformerToCreate.getFirepower(), transformerToCreate.getIntelligence(),
-				transformerToCreate.getSpeed()));
-
-		Transformer savedTransformer = transformerRepository.save(newTransformer);
+		Transformer savedTransformer = transformerRepository.save(updateDtoMapper.mapToModel(transformerToCreate));
 
 		return dataDtoMapper.domainToDto(savedTransformer);
 
-	}
-
-	
-
-	int computeSkill(int strength, int endurance, int firepower, int intelligence, int speed) {
-		return strength + endurance + firepower + intelligence + speed;
 	}
 
 }

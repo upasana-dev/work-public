@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aequilibrium.dto.TransformerDataDto;
 import com.aequilibrium.dto.TransformerUpdateDto;
 import com.aequilibrium.service.TransformerService;
+import com.sun.jdi.request.InvalidRequestStateException;
 
 @RestController
 public class TransformerController {
@@ -34,7 +35,6 @@ public class TransformerController {
 	
 	@PostMapping(path="/create", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public TransformerDataDto addTransformer(@RequestBody TransformerUpdateDto transformerToCreate) {
-
 		return service.createTransformer(transformerToCreate);
 	}
 }

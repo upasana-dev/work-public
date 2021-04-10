@@ -2,6 +2,7 @@ package com.aequilibrium.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 
 import com.aequilibrium.dto.TransformerUpdateDto;
 import com.aequilibrium.model.Transformer;
@@ -17,8 +18,14 @@ import com.aequilibrium.model.Transformer;
 public interface UpdateTransformerDtoMapper {
 
 	@Mapping(target = "id", ignore = true)
+	@Mapping(source = "dto", target = "overallRating", qualifiedByName = "computeRating")
 	public Transformer mapToModel(TransformerUpdateDto dto);
-
-	public TransformerUpdateDto domainToDto(Transformer model);
+	
+	@Named("computeRating")
+	default int computeOverallRating(TransformerUpdateDto dto) {
+		return dto.getStrength()+ dto.getEndurance()+
+				dto.getFirepower()+ dto.getIntelligence()+
+				dto.getSpeed();
+	}
 
 }

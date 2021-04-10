@@ -20,13 +20,14 @@ public class TransformerUpdateDto {
 	private int rank;
 	private int courage;
 	private int firepower;
+	private int skill;
 	private TransformerType transformerType;
 
 	@Override
 	public String toString() {
 		return "TransformerUpdateDto [name=" + name + ", strength=" + strength + ", intelligence=" + intelligence
 				+ ", speed=" + speed + ", endurance=" + endurance + ", rank=" + rank + ", courage=" + courage
-				+ ", firepower=" + firepower + ", transformerType=" + transformerType + "]";
+				+ ", firepower=" + firepower + ", skill=" + skill + ", transformerType=" + transformerType + "]";
 	}
 
 	@Override
@@ -39,6 +40,7 @@ public class TransformerUpdateDto {
 		result = prime * result + intelligence;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + rank;
+		result = prime * result + skill;
 		result = prime * result + speed;
 		result = prime * result + strength;
 		result = prime * result + ((transformerType == null) ? 0 : transformerType.hashCode());
@@ -68,6 +70,8 @@ public class TransformerUpdateDto {
 		} else if (!name.equals(other.name))
 			return false;
 		if (rank != other.rank)
+			return false;
+		if (skill != other.skill)
 			return false;
 		if (speed != other.speed)
 			return false;
@@ -148,6 +152,14 @@ public class TransformerUpdateDto {
 
 	public void setTransformerType(TransformerType transformerType) {
 		this.transformerType = transformerType;
+	}
+
+	public int getSkill() {
+		return skill;
+	}
+
+	public void setSkill(int skill) {
+		this.skill = skill;
 	}
 
 }
