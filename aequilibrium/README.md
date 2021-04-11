@@ -59,6 +59,7 @@ The following are the assumptions made when developing this API:-
 * That at any point, there can be only one Transformer with a given name
  * While an internal, computed ID is used in the database, the functional identifier of the Transformer is its name 
 * That an update to a Transformer will allow overwriting of all its information except for its name and ID.
+* That the "Skill" of a transformer is a user-provided value and its "Overall Rating" is a value that is computed by the application based on the other values provided
 
 ## Notes
 The following could be enhancements to the application:- 
