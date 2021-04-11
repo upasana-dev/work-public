@@ -10,6 +10,6 @@ import com.aequilibrium.model.Transformer;
 @Repository
 public interface TransformerRepository extends CrudRepository<Transformer, Long> {
 	
-	List<Transformer> findByName(List<String> names);
+	List<Transformer> findByNameIn(List<String> names);
 
 }
