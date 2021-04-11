@@ -3,20 +3,21 @@ package com.aequilibrium.dto;
 import java.util.List;
 
 /**
- * Structure encapsulating the results of a Transformers war.
+ * Structure encapsulating the results of a Transformers war, including the
+ * battles fought, the winner of the war and the survivors from each battle
  * 
  * @author Upasana
  *
  */
 public class TransformerWarResultDto {
-	
-	//Name of the winning team
+
+	// Name of the winning team
 	private String winningTeam;
-	
-	//Number of battles fought in the war
+
+	// Number of battles fought in the war
 	private int numberOfBattles;
-	
-	//Provides the results of the teams involved
+
+	// Provides the results of the teams involved
 	private List<TransformerWarTeamResultDto> teams;
 
 	public String getWinningTeam() {

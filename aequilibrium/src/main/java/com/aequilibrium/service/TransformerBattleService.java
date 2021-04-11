@@ -23,7 +23,7 @@ public class TransformerBattleService {
 	private static final int WIN_THRESHOLD_SKILLS = 3;
 	private static final int WIN_THRESHOLD_COURAGE = 4;
 	private static final int WIN_THRESHOLD_STRENGTH = 3;
-	
+
 	private static final List<String> ALL_POWERFUL = Arrays.asList("Optimus Prime", "Predaking");
 
 	Logger logger = LoggerFactory.getLogger(TransformerBattleService.class);
@@ -31,9 +31,25 @@ public class TransformerBattleService {
 	@Autowired
 	private TransformerRepository transformerRepository;
 
-	public TransformerWarResultDto computeWar(List<String> transformerIds) {
+	/**
+	 * Simulates and computes the outcome of a Transformer war based on list of
+	 * participants ({@code transformerNames} provided
+	 * 
+	 * <p>
+	 * The outcome is computed by identifying the transformers from the list of
+	 * names provided and determining the outcomes of the battles between these
+	 * transformers based on a list of pre-defined rules. </br></br>
+	 * If the name of an unknown transformer is provided, the entry is simply
+	 * excluded from the computation
+	 * </p>
+	 * 
+	 * @param transformerNames List of transformer names
+	 * 
+	 * @return The outcome of the war as {@link TransformerWarResultDto}
+	 */
+	public TransformerWarResultDto computeWar(List<String> transformerNames) {
 
-		List<Transformer> transformerArmy = transformerRepository.findByNameIn(transformerIds);
+		List<Transformer> transformerArmy = transformerRepository.findByNameIn(transformerNames);
 
 		List<Transformer> autobots = new ArrayList<Transformer>();
 		List<Transformer> decepticons = new ArrayList<Transformer>();
@@ -63,8 +79,6 @@ public class TransformerBattleService {
 
 		List<String> survivingAutobots = new ArrayList<>();
 		List<String> survivingDecepticons = new ArrayList<>();
-
-		
 
 		boolean isAllPowerfulAutobot = false;
 		boolean isAllPowerfulDecepticon = false;
@@ -105,10 +119,10 @@ public class TransformerBattleService {
 			battleCount++;
 		}
 
-		//Include transformers with no matches as survivors
+		// Include transformers with no matches as survivors
 		if (battleCount < autobots.size()) {
 			survivingAutobots.addAll(extractExcludedSurvivors(autobots, battleCount));
-		}else if(battleCount < decepticons.size()) {
+		} else if (battleCount < decepticons.size()) {
 			survivingDecepticons.addAll(extractExcludedSurvivors(decepticons, battleCount));
 		}
 
@@ -121,8 +135,8 @@ public class TransformerBattleService {
 	}
 
 	List<String> extractExcludedSurvivors(List<Transformer> autobots, int battleCount) {
-		return autobots.subList(battleCount, autobots.size()).stream()
-				.map(t -> t.getName()).collect(Collectors.toList());
+		return autobots.subList(battleCount, autobots.size()).stream().map(t -> t.getName())
+				.collect(Collectors.toList());
 	}
 
 	Transformer determineVictor(Transformer battlingAutobot, Transformer battlingDecepticon,

@@ -30,6 +30,9 @@ public class TransformerService {
 	@Autowired
 	private UpdateTransformerDtoMapper updateDtoMapper;
 
+	/**
+	 * Provides a list of all recognised transformers
+	 */
 	public List<TransformerDataDto> listTransformers() {
 		Iterable<Transformer> transformerIterable = transformerRepository.findAll();
 
@@ -39,8 +42,16 @@ public class TransformerService {
 		return dataDtoMapper.modelToDtoList(result);
 	}
 
+	/**
+	 * Updates or creates a specified transformer. If the transformer is found in
+	 * the DB, the transformer is updated with the data provided, if not, a new
+	 * record is created
+	 * 
+	 * @param transformerModificationData
+	 * @return The updated transformer as {@link TransformerDataDto}
+	 */
 	public TransformerDataDto createOrUpdateTransformer(TransformerUpdateDto transformerModificationData) {
-		if(transformerModificationData==null) {
+		if (transformerModificationData == null) {
 			throw new RuntimeException("Update data cannot be null!");
 		}
 
@@ -51,15 +62,16 @@ public class TransformerService {
 		if (transformerModificationData.getTransformerType() == null) {
 			throw new RuntimeException("Invalid transformer, no type specified, update aborted");
 		}
-		
-		//Check if a transformer with the provided name already exists in the DB
+
+		// Check if a transformer with the provided name already exists in the DB
 		Transformer dbTransformer = transformerRepository.findByName(transformerModificationData.getName());
-		
-		if(dbTransformer==null) {
-			//Create new Transformer object
+
+		if (dbTransformer == null) {
+			// Create new Transformer object
 			dbTransformer = updateDtoMapper.mapToModel(transformerModificationData);
 		} else {
-			// Transformer matching the name provided, already exists in the DB, will update this entry instead 
+			// Transformer matching the name provided, already exists in the DB, will update
+			// this entry instead
 			updateDtoMapper.updateModel(dbTransformer, transformerModificationData);
 		}
 
