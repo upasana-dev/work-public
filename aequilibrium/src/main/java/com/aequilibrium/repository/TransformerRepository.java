@@ -11,5 +11,7 @@ import com.aequilibrium.model.Transformer;
 public interface TransformerRepository extends CrudRepository<Transformer, Long> {
 	
 	List<Transformer> findByNameIn(List<String> names);
+	
+	Transformer findByName(String name);
 
 }

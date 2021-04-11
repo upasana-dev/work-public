@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,12 +37,22 @@ public class TransformerController {
 	}
 	
 	@PostMapping(path="/create", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public TransformerDataDto addTransformer(@RequestBody TransformerUpdateDto transformerToCreate) {
-		return service.createTransformer(transformerToCreate);
+	public TransformerDataDto addTransformer(@RequestBody TransformerUpdateDto transformerCreationData) {
+		return service.createOrUpdateTransformer(transformerCreationData);
+	}
+	
+	@PostMapping(path="/update", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public TransformerDataDto updateTransformer(@RequestBody TransformerUpdateDto transformerModificationData) {
+		return service.createOrUpdateTransformer(transformerModificationData);
 	}
 	
 	@PostMapping(path="/wage-war", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public TransformerWarResultDto wageWar(@RequestBody List<String> transformerNames) {
+		
+		if(CollectionUtils.isEmpty(transformerNames)) {
+			throw new RuntimeException("Invalid request, no transformers specified");
+		}
+		
 		return battleService.computeWar(transformerNames);
 	}
 }

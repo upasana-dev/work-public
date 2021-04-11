@@ -39,22 +39,31 @@ public class TransformerService {
 		return dataDtoMapper.modelToDtoList(result);
 	}
 
-	public TransformerDataDto createTransformer(TransformerUpdateDto transformerToCreate) {
-		if(transformerToCreate==null) {
-			throw new RuntimeException("Data cannot be null!");
+	public TransformerDataDto createOrUpdateTransformer(TransformerUpdateDto transformerModificationData) {
+		if(transformerModificationData==null) {
+			throw new RuntimeException("Update data cannot be null!");
 		}
 
-		if (!StringUtils.hasText(transformerToCreate.getName())) {
-			throw new RuntimeException("Invalid transformer, no name specified, creation aborted");
+		if (!StringUtils.hasText(transformerModificationData.getName())) {
+			throw new RuntimeException("Invalid transformer, no name specified, update aborted");
 		}
 
-		if (transformerToCreate.getTransformerType() == null) {
-			throw new RuntimeException("Invalid transformer, no type specified, creation aborted");
+		if (transformerModificationData.getTransformerType() == null) {
+			throw new RuntimeException("Invalid transformer, no type specified, update aborted");
+		}
+		
+		//Check if a transformer with the provided name already exists in the DB
+		Transformer dbTransformer = transformerRepository.findByName(transformerModificationData.getName());
+		
+		if(dbTransformer==null) {
+			//Create new Transformer object
+			dbTransformer = updateDtoMapper.mapToModel(transformerModificationData);
+		} else {
+			// Transformer matching the name provided, already exists in the DB, will update this entry instead 
+			updateDtoMapper.updateModel(dbTransformer, transformerModificationData);
 		}
 
-		Transformer savedTransformer = transformerRepository.save(updateDtoMapper.mapToModel(transformerToCreate));
-
-		return dataDtoMapper.modelToDto(savedTransformer);
+		return dataDtoMapper.modelToDto(transformerRepository.save(dbTransformer));
 
 	}
 
