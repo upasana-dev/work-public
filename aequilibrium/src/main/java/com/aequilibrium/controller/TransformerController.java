@@ -8,6 +8,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aequilibrium.dto.TransformerDataDto;
@@ -17,6 +18,7 @@ import com.aequilibrium.service.TransformerBattleService;
 import com.aequilibrium.service.TransformerService;
 
 @RestController
+@RequestMapping("/transformers")
 public class TransformerController {
 	
 	@Autowired
@@ -24,13 +26,8 @@ public class TransformerController {
 	
 	@Autowired
 	private TransformerBattleService battleService;
-
-	@GetMapping("/")
-	public String ping() {
-		return "You have reached the Transformers' application";
-	}
 	
-	@GetMapping("/list")
+	@GetMapping()
 	public List<TransformerDataDto> listTransformers() {
 		return service.listTransformers();
 	}
