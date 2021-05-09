@@ -40,12 +40,12 @@ Sample Request : `Curl -H "Content-Type: application/json" -s -XPUT localhost:80
 Sample Response : 
 `{"name":"Optimus Prime","strength":8,"intelligence":9,"speed":6,"endurance":5,"rank":1,"courage":1,"firepower":9,"skill":7,"overallRating":37,"transformerType":"D"}`
 
-### Compute War Outcome
+### Compute War Outcome (GET)
 Accepts the names of Transformers and calculates the outcome of a war between the specified transformers
 
-Endpoint : __localhost:8080/wage-war__
+Endpoint : __localhost:8080/transformers/war__
 
-Sample Request : `Curl -H "Content-Type: application/json" -s -XPOST localhost:8080/wage-war -d "[\"Optimus Prime\", \"Ironhide\", \"Starscream\", \"Bumblebee\",  \"Optimus Nemesis\"]"`
+Sample Request : `Curl -H "Content-Type: application/json" -s -XGET localhost:8080/transformers/war -d "[\"Optimus Prime\", \"Ironhide\", \"Starscream\", \"Bumblebee\", \"Optimus Nemesis\"]"`
 
 Sample Response : `{"winningTeam":"Autobots","numberOfBattles":2,"teams":[{"name":"Autobots","survivors":["Bumblebee","Ironhide"]},{"name":"Decepticons","survivors":["Optimus Prime"]}]}`
 

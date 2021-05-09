@@ -43,7 +43,7 @@ public class TransformerController {
 		return service.createOrUpdateTransformer(transformerModificationData);
 	}
 	
-	@PostMapping(path="/wage-war", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path="/war", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public TransformerWarResultDto wageWar(@RequestBody List<String> transformerNames) {
 		
 		if(CollectionUtils.isEmpty(transformerNames)) {
