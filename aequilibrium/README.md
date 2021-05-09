@@ -15,7 +15,7 @@ Endpoint : __localhost:8080/__
 ### List Existing Transformers (GET)
 Lists all saved Transformers along with their details
 
-Endpoint : __localhost:8080/list__ 
+Endpoint : __localhost:8080/transformers__ 
 
 Sample Response : 
 `[{"name":"Optimus Prime","strength":8,"intelligence":5,"speed":6,"endurance":3,"rank":1,"courage":1,"firepower":9,"skill":4,"overallRating":20,"transformerType":"A"},{"name":"Bumblebee","strength":7,"intelligence":5,"speed":5,"endurance":6,"rank":9,"courage":8,"firepower":7,"skill":10,"overallRating":30,"transformerType":"A"},{"name":"Ironhide","strength":6,"intelligence":4,"speed":8,"endurance":6,"rank":7,"courage":7,"firepower":8,"skill":7,"overallRating":32,"transformerType":"A"},{"name":"Starscream","strength":9,"intelligence":3,"speed":8,"endurance":6,"rank":6,"courage":7,"firepower":5,"skill":7,"overallRating":31,"transformerType":"D"},{"name":"Predaking","strength":8,"intelligence":5,"speed":6,"endurance":3,"rank":2,"courage":1,"firepower":9,"skill":2,"overallRating":31,"transformerType":"D"},{"name":"Megatron","strength":6,"intelligence":8,"speed":8,"endurance":5,"rank":4,"courage":9,"firepower":7,"skill":9,"overallRating":34,"transformerType":"D"}]`
@@ -23,19 +23,19 @@ Sample Response :
 ### Create Transformer (POST)
 Creates and saves a new Transformer based on the data provided. This endpoint returns the saved Transformer
 
-Endpoint : __localhost:8080/create__
+Endpoint : __localhost:8080/transformers__
 
-Sample Request : `Curl -H "Content-Type: application/json" -s -XPOST localhost:8080/create -d "{ \"name\":\"Optimus Nemesis\",\"strength\":8,\"intelligence\":5,\"speed\":6,\"endurance\":3,\"rank\":3,\"courage\":1,\"firepower\":9,\"transformerType\":\"D\", \"skill\":7}"`
+Sample Request : `Curl -H "Content-Type: application/json" -s -XPOST localhost:8080/transformers -d "{ \"name\":\"Optimus Nemesis\",\"strength\":8,\"intelligence\":5,\"speed\":6,\"endurance\":3,\"rank\":3,\"courage\":1,\"firepower\":9,\"transformerType\":\"D\", \"skill\":7}"`
 
 Sample Response : 
 `{"name":"Optimus Nemesis","strength":8,"intelligence":5,"speed":6,"endurance":3,"rank":3,"courage":1,"firepower":9,"skill":7,"overallRating":31,"transformerType":"D"}`
 
-###  Update Transformer (POST)
+###  Update Transformer (PUT)
 Updates an existing Transformer based on the data provided. This endpoint returns the saved Transformer
 
-Endpoint : __localhost:8080/update__
+Endpoint : __localhost:8080/transformers__
 
-Sample Request : `Curl -H "Content-Type: application/json" -s -XPOST localhost:8080/update -d "{ \"name\":\"Optimus Prime\",\"strength\":8,\"intelligence\":9,\"speed\":6,\"endurance\":5,\"rank\":1,\"courage\":1,\"firepower\":9,\"transformerType\":\"D\", \"skill\":7}"`
+Sample Request : `Curl -H "Content-Type: application/json" -s -XPUT localhost:8080/transformers -d "{ \"name\":\"Optimus Prime\",\"strength\":8,\"intelligence\":9,\"speed\":6,\"endurance\":5,\"rank\":1,\"courage\":1,\"firepower\":9,\"transformerType\":\"D\", \"skill\":7}"`
 
 Sample Response : 
 `{"name":"Optimus Prime","strength":8,"intelligence":9,"speed":6,"endurance":5,"rank":1,"courage":1,"firepower":9,"skill":7,"overallRating":37,"transformerType":"D"}`

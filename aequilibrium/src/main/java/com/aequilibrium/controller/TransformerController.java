@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,12 +33,12 @@ public class TransformerController {
 		return service.listTransformers();
 	}
 	
-	@PostMapping(path="/create", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public TransformerDataDto addTransformer(@RequestBody TransformerUpdateDto transformerCreationData) {
 		return service.createOrUpdateTransformer(transformerCreationData);
 	}
 	
-	@PostMapping(path="/update", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public TransformerDataDto updateTransformer(@RequestBody TransformerUpdateDto transformerModificationData) {
 		return service.createOrUpdateTransformer(transformerModificationData);
 	}
